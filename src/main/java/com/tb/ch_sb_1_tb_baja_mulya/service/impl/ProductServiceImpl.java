@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     public Product getById(String id) {
         Optional<Product> optionalBranch = productRepository.findById(id);
         if(optionalBranch.isEmpty()){
-            throw new RuntimeException("Branch Not Found");
+            throw new RuntimeException("Product Not Found");
         }
         return optionalBranch.get();
     }
