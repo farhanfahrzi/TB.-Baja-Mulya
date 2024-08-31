@@ -1,5 +1,6 @@
 package com.tb.ch_sb_1_tb_baja_mulya.entity;
 
+import com.tb.ch_sb_1_tb_baja_mulya.constant.ConstantTable;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,7 @@
 package com.tb.ch_sb_1_tb_baja_mulya.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.tb.ch_sb_1_tb_baja_mulya.constant.ConstantTable;
 import jakarta.persistence.*;
 import lombok.*;
 

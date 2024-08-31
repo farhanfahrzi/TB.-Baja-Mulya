@@ -1,10 +1,12 @@
 package com.tb.ch_sb_1_tb_baja_mulya.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tb.ch_sb_1_tb_baja_mulya.constant.ConstantTable;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
