@@ -1,10 +1,14 @@
 package com.tb.ch_sb_1_tb_baja_mulya.service.impl;
 
+import com.tb.ch_sb_1_tb_baja_mulya.dto.request.NewEmployeeRequest;
 import com.tb.ch_sb_1_tb_baja_mulya.entity.Employee;
 import com.tb.ch_sb_1_tb_baja_mulya.repository.EmployeeRepository;
 import com.tb.ch_sb_1_tb_baja_mulya.service.EmployeeService;
+import com.tb.ch_sb_1_tb_baja_mulya.utils.Validationutil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -12,9 +16,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     public final EmployeeRepository employeeRepository;
+    private final Validationutil validationutil;
 
     @Override
-    public Employee create(Employee employee) {
+    public Employee create(NewEmployeeRequest employeeRequest) {
+        validationutil.validate(employeeRequest);
+        Employee employee = Employee.builder()
+                .name(employeeRequest.getName())
+                .section(employeeRequest.getSection())
+                .build();
         return employeeRepository.saveAndFlush(employee);
     }
 
@@ -44,6 +54,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public Employee FindByIdOrThrowNotFound(String id){
-        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee Not Found"));
+        return employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Employee Not Found"));
     }
 }

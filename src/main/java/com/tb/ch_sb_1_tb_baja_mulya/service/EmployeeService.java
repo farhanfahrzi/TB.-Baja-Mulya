@@ -1,12 +1,13 @@
 package com.tb.ch_sb_1_tb_baja_mulya.service;
 
+import com.tb.ch_sb_1_tb_baja_mulya.dto.request.NewEmployeeRequest;
 import com.tb.ch_sb_1_tb_baja_mulya.entity.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    Employee create (Employee employee);
+    Employee create (NewEmployeeRequest employee);
     Employee getById (String id);
     List<Employee> getAll(String name);
     Employee update (Employee employee);

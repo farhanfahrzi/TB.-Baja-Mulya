@@ -2,6 +2,7 @@ package com.tb.ch_sb_1_tb_baja_mulya.controller;
 
 import com.tb.ch_sb_1_tb_baja_mulya.constant.APIUrl;
 import com.tb.ch_sb_1_tb_baja_mulya.constant.ConstantMessage;
+import com.tb.ch_sb_1_tb_baja_mulya.dto.request.NewProductRequest;
 import com.tb.ch_sb_1_tb_baja_mulya.dto.response.CommonResponse;
 import com.tb.ch_sb_1_tb_baja_mulya.entity.Product;
 import com.tb.ch_sb_1_tb_baja_mulya.service.ProductService;
@@ -20,7 +21,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse<Product>> createNewProduct(@RequestBody Product product) {
+    public ResponseEntity<CommonResponse<Product>> createNewProduct(@RequestBody NewProductRequest product) {
         Product newProduct = productService.create(product);
 
         CommonResponse<Product> commonResponse = CommonResponse.<Product>builder()

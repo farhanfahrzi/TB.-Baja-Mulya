@@ -1,10 +1,14 @@
 package com.tb.ch_sb_1_tb_baja_mulya.service.impl;
 
+import com.tb.ch_sb_1_tb_baja_mulya.dto.request.NewCustomerRequest;
 import com.tb.ch_sb_1_tb_baja_mulya.entity.Customer;
 import com.tb.ch_sb_1_tb_baja_mulya.repository.CustomerRepository;
 import com.tb.ch_sb_1_tb_baja_mulya.service.CustomerService;
+import com.tb.ch_sb_1_tb_baja_mulya.utils.Validationutil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -12,9 +16,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
     public final CustomerRepository customerRepository;
+    private final Validationutil validationutil;
 
     @Override
-    public Customer create(Customer customer) {
+    public Customer create(NewCustomerRequest customerRequest) {
+        validationutil.validate(customerRequest);
+        Customer customer = Customer.builder()
+                .name(customerRequest.getName())
+                .mobilePhoneNo(customerRequest.getMobilePhoneNo())
+                .address(customerRequest.getAddress())
+                .birthDate(customerRequest.getBirthDate())
+                .email(customerRequest.getEmail())
+                .build();
         return customerRepository.saveAndFlush(customer);
     }
 
@@ -45,6 +58,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public Customer FindByIdOrThrowNotFound(String id){
-        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer Not Found"));
+        return customerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer Not Found"));
     }
 }
