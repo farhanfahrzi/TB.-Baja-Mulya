@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .mobilePhoneNo(customerRequest.getMobilePhoneNo())
                 .address(customerRequest.getAddress())
                 .birthDate(customerRequest.getBirthDate())
-                .email(customerRequest.getEmail())
+//                .email(customerRequest.getEmail())
                 .build();
         return customerRepository.saveAndFlush(customer);
     }

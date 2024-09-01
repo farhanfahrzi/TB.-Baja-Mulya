@@ -35,9 +35,9 @@ public class Customer {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
-    @Column(name = "email")
-    @Email
-    private String email;
+//    @Column(name = "email")
+//    @Email
+//    private String email;
 
     @Column(name = "status")
     private Boolean status;

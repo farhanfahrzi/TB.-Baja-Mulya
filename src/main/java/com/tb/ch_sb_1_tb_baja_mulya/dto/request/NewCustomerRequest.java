@@ -31,8 +31,8 @@ public class NewCustomerRequest {
 //    @Pattern(regexp = "^\\\\d{4}-\\\\d{2}-\\\\d{2}$", message = "Format tanggal harus 'yyyy-MM-dd'")
     private Date birthDate;
 
-	@Email(message = "Format email tidak valid")
-	private String email;
+//	@Email(message = "Format email tidak valid")
+//	private String email;
 
     private String status;
 }
