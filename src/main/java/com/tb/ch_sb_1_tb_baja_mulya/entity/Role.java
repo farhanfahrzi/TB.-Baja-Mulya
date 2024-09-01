@@ -9,11 +9,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = ConstantTable.USER_ROLE)
+@Builder
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
