@@ -42,4 +42,9 @@ public class Customer {
     @Column(name = "status")
     private Boolean status;
 
+    @OneToOne
+    @JoinColumn(name = "user_account_id", unique = true)
+    private UserAccount userAccount;
+
+
 }

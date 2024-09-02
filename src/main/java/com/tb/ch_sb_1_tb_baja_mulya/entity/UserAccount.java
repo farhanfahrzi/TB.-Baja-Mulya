@@ -7,9 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +20,6 @@ import java.util.List;
 @Entity
 @Table(name = ConstantTable.USER_ACCOUNT)
 public class UserAccount implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -48,22 +47,17 @@ public class UserAccount implements UserDetails {
 //	GrantedAuthority{
 //		authorities: ROLE_ADMIN
 //	}
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return role.stream().map(role -> new SimpleGrantedAuthority(
-//                role
-//                        .getRole()
-//                        .name())).toList();
-//    }
-//
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return role.stream().map(role -> new SimpleGrantedAuthority(
+                role
+                        .getRole()
+                        .name())).toList();
     }
 
     @Override
-    public String getUsername() {
-        return username;
+    public String getUsername() { // kalau mau pakai email, propertynya boleh di ganti namanya jadi email. tapi getternya tetep getUsername()
+        return username;  /// email
     }
 
     @Override

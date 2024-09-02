@@ -9,6 +9,7 @@ import com.tb.ch_sb_1_tb_baja_mulya.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class EmployeeController {
     public final EmployeeService employeeService;
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @PostMapping
     public ResponseEntity<CommonResponse<Employee>> createNewEmployee(@RequestBody NewEmployeeRequest employee) {
         Employee newEmployee = employeeService.create(employee);
@@ -34,6 +36,7 @@ public class EmployeeController {
                 .body(commonResponse);
     }
     // use parthVariable
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @GetMapping(path = APIUrl.PATH_VAR_ID)
     public ResponseEntity<CommonResponse<?>> getById(@PathVariable String id){
 
@@ -48,8 +51,9 @@ public class EmployeeController {
 
     }
     // use request param
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @GetMapping
-    public ResponseEntity<CommonResponse<List<Employee>>> getAllProduct(@RequestParam(name = "name", required = false) String name){
+    public ResponseEntity<CommonResponse<List<Employee>>> getAllEmployee(@RequestParam(name = "name", required = false) String name){
         List<Employee> employeeList = employeeService.getAll(name);
 
         // setting paginationnya
@@ -62,6 +66,7 @@ public class EmployeeController {
 
         return ResponseEntity.ok(commonResponse);
     }
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @PutMapping
     public ResponseEntity<CommonResponse<Employee>> updateEmployee(@RequestBody Employee employee){
         Employee updateEmployee = employeeService.update(employee);
@@ -74,6 +79,7 @@ public class EmployeeController {
 
         return ResponseEntity.ok(commonResponse);
     }
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @DeleteMapping(path = APIUrl.PATH_VAR_ID)
     public ResponseEntity<CommonResponse<?>> deleteById(@PathVariable String id){
         employeeService.deleteById(id);

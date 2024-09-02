@@ -9,6 +9,7 @@ import com.tb.ch_sb_1_tb_baja_mulya.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -61,6 +62,7 @@ public class ProductController {
 
         return ResponseEntity.ok(commonResponse);
     }
+
     @PutMapping
     public ResponseEntity<CommonResponse<Product>> updateProduct(@RequestBody Product product){
         Product updateProduct = productService.update(product);
@@ -73,6 +75,7 @@ public class ProductController {
 
         return ResponseEntity.ok(commonResponse);
     }
+
     @DeleteMapping(path = APIUrl.PATH_VAR_ID)
     public ResponseEntity<CommonResponse<?>> deleteById(@PathVariable String id){
         productService.deleteById(id);
